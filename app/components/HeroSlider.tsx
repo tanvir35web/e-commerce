@@ -118,7 +118,7 @@ export default function HeroSlider({
   };
 
   return (
-    <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden rounded-lg">
+    <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden ">
       {/* Slides Container */}
       <div
         ref={sliderRef}
@@ -154,7 +154,7 @@ export default function HeroSlider({
               />
             </div>
 
-            <div className="container mx-auto px-6 md:px-12 flex items-center justify-between relative z-10">
+            <div className="max-w-[1220px] w-full mx-auto flex items-center justify-between relative z-10">
               {/* Left Content */}
               <div className="w-full md:w-1/2">
                 <h1 className="text-4xl md:text-6xl font-bold mb-4">
