@@ -11,7 +11,7 @@ import {
 const PrimaryNavbar = () => {
   return (
     <nav className="bg-[#03484D]">
-      <div className=" max-w-[1220px] w-full mx-auto h-17  text-white flex items-center justify-evenly">
+      <div className=" max-w-[1220px] w-full mx-auto h-17  text-white flex items-center justify-between">
         <div className="w-[132px] h-[48px]">
           <Image
             src={WinstoreLogo}
@@ -24,12 +24,12 @@ const PrimaryNavbar = () => {
 
         {/* Category select and search bar */}
         <div className="w-[534px] h-[39px] bg-white rounded-md overflow-hidden relative">
-          <div className="w-[43px] h-full flex items-center justify-center bg-[#B6B6B6] absolute right-0 ">
+          <div className="w-[43px] h-full flex items-center justify-center bg-[#B6B6B6] absolute right-0 cursor-pointer ">
             <SearchIcon />
           </div>
           <select
             name="Search-select"
-            id=""
+            id="searchSelect"
             className="bg-white text-[#ABA3A3] w-[130px] px-3 h-full text-[13px] font-normal outline-none focus:outline-none"
           >
             <option value="">All categories</option>
