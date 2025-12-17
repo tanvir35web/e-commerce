@@ -1,21 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Product } from "../type";
 
-// Type definitions
-interface Product {
-  id: number;
-  vendorName: string;
-  name: string;
-  image: string;
-  originalPrice: number;
-  discountedPrice: number;
-  link: string;
+interface ProductData {
+  success: boolean;
+  data: Product[];
 }
 
 interface NewArrivalsProps {
-  products: Product[];
+  products: ProductData;
   title?: string;
 }
 
@@ -54,7 +49,7 @@ const NewArrivals: React.FC<NewArrivalsProps> = ({
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
-          {products.map((product) => (
+          {products.data.map((product) => (
             <div
               key={product.id}
               className="bg-white border border-gray-200 rounded-lg overflow-hidden p-4"
@@ -122,93 +117,43 @@ const NewArrivals: React.FC<NewArrivalsProps> = ({
 
 // Demo Component
 const NewArrivalsSection = () => {
-  // Mock data - Replace with your API response
-  const mockProducts: Product[] = [
-    {
-      id: 1,
-      vendorName: "Bin Bakar Electronics",
-      name: "Samsung 40N5300 Smart LED TV",
-      image:
-        "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400&q=80",
-      originalPrice: 60.0,
-      discountedPrice: 56.0,
-      link: "/product/samsung-40n5300",
-    },
-    {
-      id: 2,
-      vendorName: "Bin Bakar Electronics",
-      name: "Samsung Automatic Washing Machine",
-      image:
-        "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=400&q=80",
-      originalPrice: 110.0,
-      discountedPrice: 101.0,
-      link: "/product/samsung-washing-machine",
-    },
-    {
-      id: 3,
-      vendorName: "Bin Bakar Electronics",
-      name: "Haier HSU-12HFMAC Air Conditioner",
-      image:
-        "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=400&q=80",
-      originalPrice: 56.0,
-      discountedPrice: 70.0,
-      link: "/product/haier-ac",
-    },
-    {
-      id: 4,
-      vendorName: "Bin Bakar Electronics",
-      name: "Anex Roti Maker AG-1021",
-      image:
-        "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=400&q=80",
-      originalPrice: 56.0,
-      discountedPrice: 70.0,
-      link: "/product/anex-roti-maker",
-    },
-    {
-      id: 5,
-      vendorName: "Bin Bakar Electronics",
-      name: "Gree GS-12PITH Air Conditioner",
-      image:
-        "https://images.unsplash.com/photo-1631545805416-bb14a19e2728?w=400&q=80",
-      originalPrice: 56.0,
-      discountedPrice: 86.0,
-      link: "/product/gree-ac",
-    },
-    {
-      id: 6,
-      vendorName: "Bin Bakar Electronics",
-      name: "Gree Air Conditioner 18000 BTU",
-      image:
-        "https://images.unsplash.com/photo-1610461888750-10bfc601b874?w=400&q=80",
-      originalPrice: 56.0,
-      discountedPrice: 171.0,
-      link: "/product/gree-ac-18000",
-    },
-    {
-      id: 7,
-      vendorName: "Bin Bakar Electronics",
-      name: "LG 43 Inch Smart LED TV",
-      image:
-        "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400&q=80",
-      originalPrice: 75.0,
-      discountedPrice: 68.0,
-      link: "/product/lg-tv",
-    },
-    {
-      id: 8,
-      vendorName: "Bin Bakar Electronics",
-      name: "Sony Home Theater System",
-      image:
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
-      originalPrice: 120.0,
-      discountedPrice: 95.0,
-      link: "/product/sony-home-theater",
-    },
-  ];
+  const [products, setProducts] = useState<ProductData>({
+    success: false,
+    data: [],
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/products");
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setProducts({ success: false, data: [] });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-xl font-semibold text-gray-600">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <NewArrivals products={mockProducts} title="New Arrivals" />
+      <NewArrivals products={products} title="New Arrivals" />
     </div>
   );
 };

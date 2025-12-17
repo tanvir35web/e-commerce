@@ -1,31 +1,23 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { LeftArrowIcon, RightArrowIcon } from "../icons/icons";
+import { Category } from "../type";
 
-// Type definitions
-interface Category {
-  id: number;
-  name: string;
-  image: string;
-  link: string;
+interface CategoryData {
+  success: boolean;
+  data: Category[];
 }
 
 interface CategorySliderProps {
-  categories: Category[];
-  bgColor?: string;
+  categories: CategoryData;
 }
 
-const CategorySlider: React.FC<CategorySliderProps> = ({
-  categories,
-  bgColor = "#f5f1e8",
-}) => {
+const CategorySlider: React.FC<CategorySliderProps> = ({ categories }) => {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  // Check scroll position to show/hide arrows
   const checkScroll = () => {
     if (sliderRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
@@ -80,7 +72,7 @@ const CategorySlider: React.FC<CategorySliderProps> = ({
             msOverflowStyle: "none",
           }}
         >
-          {categories.map((category) => (
+          {categories.data.map((category) => (
             <div
               key={category.id}
               className="flex-shrink-0 w-[250px] group cursor-pointer"
@@ -142,68 +134,43 @@ const CategorySlider: React.FC<CategorySliderProps> = ({
 };
 
 const CategorySection = () => {
-  const mockCategories: Category[] = [
-    {
-      id: 1,
-      name: "Electronics",
-      image:
-        "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500&q=80",
-      link: "/category/electronics",
-    },
-    {
-      id: 2,
-      name: "Fashion",
-      image:
-        "https://images.unsplash.com/photo-1445205170230-053b83016050?w=500&q=80",
-      link: "/category/fashion",
-    },
-    {
-      id: 3,
-      name: "Appliances",
-      image:
-        "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=500&q=80",
-      link: "/category/appliances",
-    },
-    {
-      id: 4,
-      name: "Babies Store",
-      image:
-        "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500&q=80",
-      link: "/category/babies",
-    },
-    {
-      id: 5,
-      name: "Sports",
-      image:
-        "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=500&q=80",
-      link: "/category/sports",
-    },
-    {
-      id: 6,
-      name: "Home & Garden",
-      image:
-        "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=500&q=80",
-      link: "/category/home",
-    },
-    {
-      id: 7,
-      name: "Books",
-      image:
-        "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=500&q=80",
-      link: "/category/books",
-    },
-    {
-      id: 8,
-      name: "Toys & Games",
-      image:
-        "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=500&q=80",
-      link: "/category/toys",
-    },
-  ];
+  const [categories, setCategories] = useState<CategoryData>({
+    success: false,
+    data: [],
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/categories");
+        if (!response.ok) {
+          throw new Error("Failed to fetch categories");
+        }
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+        setCategories({ success: false, data: [] });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="bg-gradient-to-b from-[#F3EDC9] to-white py-12 flex items-center justify-center">
+        <div className="text-xl font-semibold text-gray-600">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-gradient-to-b from-[#F3EDC9] to-white">
-      <CategorySlider categories={mockCategories} />
+      <CategorySlider categories={categories} />
     </div>
   );
 };
