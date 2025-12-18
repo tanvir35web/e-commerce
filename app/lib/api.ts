@@ -10,7 +10,7 @@ const API_BASE_URL =
 
 export const api = {
   async getProducts(): Promise<ApiResponse<Product[]>> {
-    const response = await fetch(`${API_BASE_URL}/api/products`);
+    const response = await fetch(`${API_BASE_URL}/api/products?limit=10`);
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
