@@ -2,17 +2,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { LeftArrowIcon, RightArrowIcon } from "../icons/icons";
-import { Category } from "../type";
+import { CategorySliderProps } from "../type";
 import { useCategories } from "../hooks/useCategories";
+import { CategorySliderSkeleton } from "../skeletonLoader/SkeletonLoader";
 
-interface CategoryData {
-  success: boolean;
-  data: Category[];
-}
 
-interface CategorySliderProps {
-  categories: CategoryData;
-}
+
 
 const CategorySlider: React.FC<CategorySliderProps> = ({ categories }) => {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
@@ -66,7 +61,7 @@ const CategorySlider: React.FC<CategorySliderProps> = ({ categories }) => {
         {/* Categories Container */}
         <div
           ref={sliderRef}
-          className="max-w-[1220px] mx-auto px-2 flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth "
+          className="max-w-[1220px] mx-auto px-2 flex gap-4 md:gap-6 overflow-x-auto scrollbar-hide scroll-smooth "
           onScroll={checkScroll}
           style={{
             scrollbarWidth: "none",
@@ -76,7 +71,7 @@ const CategorySlider: React.FC<CategorySliderProps> = ({ categories }) => {
           {categories.data.map((category) => (
             <div
               key={category.id}
-              className="flex-shrink-0 w-[250px] group cursor-pointer"
+              className="flex-shrink-0 w-[200px] md:w-[220px] lg:w-[250px] group cursor-pointer"
             >
               <a
                 href={category.link}
@@ -87,7 +82,7 @@ const CategorySlider: React.FC<CategorySliderProps> = ({ categories }) => {
                 }}
               >
                 {/* Category Image */}
-                <div className="relative h-[200px] rounded-lg shadow-md mb-3">
+                <div className="relative h-[160px] md:h-[180px] lg:h-[200px] rounded-lg shadow-md mb-3">
                   <Image
                     src={category.image}
                     alt={category.name}
@@ -99,11 +94,11 @@ const CategorySlider: React.FC<CategorySliderProps> = ({ categories }) => {
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 "></div>
 
                   {/* Category Info */}
-                  <div className="absolute bottom-3 -left-2 bg-white/90 shadow-sm p-4 flex items-center justify-between gap-16 group-hover:shadow-md">
-                    <h3 className="text-lg font-semibold text-gray-800">
+                  <div className="absolute bottom-3 -left-2 bg-white/90 shadow-sm p-3 md:p-4 flex items-center justify-between gap-8 md:gap-12 lg:gap-16 group-hover:shadow-md">
+                    <h3 className="text-base md:text-lg font-semibold text-gray-800 truncate">
                       {category.name}
                     </h3>
-                    <span className="text-cyan-500 font-medium text-sm group-hover:text-cyan-600 transition-colors">
+                    <span className="text-cyan-500 font-medium text-xs md:text-sm group-hover:text-cyan-600 transition-colors flex-shrink-0">
                       Shop
                     </span>
                   </div>
@@ -139,8 +134,8 @@ const CategorySection = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-gradient-to-b from-[#F3EDC9] to-white py-12 flex items-center justify-center">
-        <div className="text-xl font-semibold text-gray-600">Loading...</div>
+      <div className="bg-gradient-to-b from-[#F3EDC9] to-white">
+        <CategorySliderSkeleton />
       </div>
     );
   }

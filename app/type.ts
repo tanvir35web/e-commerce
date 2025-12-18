@@ -27,3 +27,24 @@ export interface Category {
   image: string;
   link: string;
 }
+
+export interface ProductData {
+  success: boolean;
+  data: Product[];
+}
+
+export  interface NewArrivalsProps {
+  products: ProductData;
+  title?: string;
+}
+
+export interface CategoryData {
+  success: boolean;
+  data: Category[];
+}
+
+export interface CategorySliderProps {
+  categories: CategoryData;
+}
+
+
