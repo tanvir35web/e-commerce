@@ -33,9 +33,8 @@ export interface ProductData {
   data: Product[];
 }
 
-export  interface NewArrivalsProps {
-  products: ProductData;
-  title?: string;
+export  interface ProductCardProps {
+  product: Product;
 }
 
 export interface CategoryData {
