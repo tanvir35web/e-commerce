@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { LeftArrowIcon, RightArrowIcon } from "../icons/icons";
 import { Category } from "../type";
+import { useCategories } from "../hooks/useCategories";
 
 interface CategoryData {
   success: boolean;
@@ -134,36 +135,22 @@ const CategorySlider: React.FC<CategorySliderProps> = ({ categories }) => {
 };
 
 const CategorySection = () => {
-  const [categories, setCategories] = useState<CategoryData>({
-    success: false,
-    data: [],
-  });
-  const [loading, setLoading] = useState(true);
+  const { data: categories, isLoading, isError } = useCategories();
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api/categories");
-        if (!response.ok) {
-          throw new Error("Failed to fetch categories");
-        }
-        const data = await response.json();
-        setCategories(data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-        setCategories({ success: false, data: [] });
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="bg-gradient-to-b from-[#F3EDC9] to-white py-12 flex items-center justify-center">
         <div className="text-xl font-semibold text-gray-600">Loading...</div>
+      </div>
+    );
+  }
+
+  if (isError || !categories) {
+    return (
+      <div className="bg-gradient-to-b from-[#F3EDC9] to-white py-12 flex items-center justify-center">
+        <div className="text-xl font-semibold text-red-600">
+          Error loading categories
+        </div>
       </div>
     );
   }

@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Product } from "../type";
+import { useProducts } from "../hooks/useProducts";
 
 interface ProductData {
   success: boolean;
@@ -117,36 +118,22 @@ const NewArrivals: React.FC<NewArrivalsProps> = ({
 
 // Demo Component
 const NewArrivalsSection = () => {
-  const [products, setProducts] = useState<ProductData>({
-    success: false,
-    data: [],
-  });
-  const [loading, setLoading] = useState(true);
+  const { data: products, isLoading, isError } = useProducts();
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api/products");
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-        setProducts({ success: false, data: [] });
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-xl font-semibold text-gray-600">Loading...</div>
+      </div>
+    );
+  }
+
+  if (isError || !products) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-xl font-semibold text-red-600">
+          Error loading products
+        </div>
       </div>
     );
   }
