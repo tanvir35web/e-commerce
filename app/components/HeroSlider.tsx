@@ -118,7 +118,7 @@ export default function HeroSlider({
   };
 
   return (
-    <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden ">
+    <div className="relative w-full h-[300px] sm:h-[350px] md:h-[450px] lg:h-[500px] overflow-hidden">
       {/* Slides Container */}
       <div
         ref={sliderRef}
@@ -154,19 +154,19 @@ export default function HeroSlider({
               />
             </div>
 
-            <div className="max-w-[1220px] w-full mx-auto flex items-center justify-between relative z-10">
+            <div className="max-w-[1220px] w-full mx-auto px-4 sm:px-6 lg:px-0 flex items-center justify-between relative z-10">
               {/* Left Content */}
-              <div className="w-full md:w-1/2">
-                <h1 className="text-4xl md:text-6xl font-bold mb-4">
+              <div className="w-full lg:w-1/2">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-2 sm:mb-3 lg:mb-4">
                   <span className="text-gray-800">Shop </span>
                   <span className="text-cyan-500">{slide.title}</span>
                 </h1>
-                <p className="text-gray-600 text-sm md:text-base mb-6 max-w-md leading-relaxed">
+                <p className="text-gray-600 text-xs sm:text-sm md:text-base mb-4 sm:mb-5 lg:mb-6 max-w-md leading-relaxed line-clamp-2 sm:line-clamp-none">
                   {slide.subtitle}
                 </p>
                 <a
                   href={slide.buttonLink}
-                  className="inline-block bg-cyan-500 text-white px-8 py-3 rounded hover:bg-cyan-600 transition-colors duration-300"
+                  className="inline-block bg-cyan-500 text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 rounded text-xs sm:text-sm lg:text-base hover:bg-cyan-600 transition-colors duration-300"
                   onClick={(e) => {
                     e.preventDefault();
                     window.location.href = slide.buttonLink;
@@ -178,11 +178,11 @@ export default function HeroSlider({
 
               {/* Discount Badge */}
               {slide.discount && (
-                <div className="absolute top-8 right-8 bg-orange-500 text-white rounded-full w-[165px] h-[165px] flex flex-col items-center justify-center shadow-lg z-20">
-                  <span className="text-[47px] font-bold">
+                <div className="hidden sm:flex absolute top-4 sm:top-6 lg:top-8 right-4 sm:right-6 lg:right-8 bg-orange-500 text-white rounded-full w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] lg:w-[165px] lg:h-[165px] flex-col items-center justify-center shadow-lg z-20">
+                  <span className="text-2xl sm:text-3xl lg:text-[47px] font-bold">
                     {slide.discount}%
                   </span>
-                  <span className="text-[47px] -mt-6">Off</span>
+                  <span className="text-2xl sm:text-3xl lg:text-[47px] -mt-2 sm:-mt-3 lg:-mt-6">Off</span>
                 </div>
               )}
             </div>
@@ -191,15 +191,15 @@ export default function HeroSlider({
       </div>
 
       {/* Dots Navigation */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+      <div className="absolute bottom-4 sm:bottom-5 lg:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 z-20">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`h-3 rounded-full transition-all duration-300 cursor-pointer ${
+            className={`h-2 sm:h-2.5 lg:h-3 rounded-full transition-all duration-300 cursor-pointer ${
               index === currentSlide
-                ? "bg-[#034E53] w-8"
-                : "bg-gray-400 w-3 hover:bg-gray-500"
+                ? "bg-[#034E53] w-6 sm:w-7 lg:w-8"
+                : "bg-gray-400 w-2 sm:w-2.5 lg:w-3 hover:bg-gray-500"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
