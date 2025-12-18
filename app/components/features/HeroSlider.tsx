@@ -124,9 +124,8 @@ export default function HeroSlider({
         ref={sliderRef}
         className="relative h-full flex transition-transform duration-500 ease-out"
         style={{
-          transform: `translateX(calc(-${
-            currentSlide * 100
-          }% + ${translateX}px))`,
+          transform: `translateX(calc(-${currentSlide * 100
+            }% + ${translateX}px))`,
           cursor: isDragging ? "grabbing" : "grab",
         }}
         onMouseDown={handleMouseDown}
@@ -154,7 +153,7 @@ export default function HeroSlider({
               />
             </div>
 
-            <div className="max-w-[1220px] w-full mx-auto px-4 sm:px-6 lg:px-0 flex items-center justify-between relative z-10">
+            <div className="max-w-[1220px] w-full mx-auto px-4 sm:px-6 lg:px-2 flex items-center justify-between relative z-10">
               {/* Left Content */}
               <div className="w-full lg:w-1/2">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-2 sm:mb-3 lg:mb-4">
@@ -196,11 +195,10 @@ export default function HeroSlider({
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`h-2 sm:h-2.5 lg:h-3 rounded-full transition-all duration-300 cursor-pointer ${
-              index === currentSlide
+            className={`h-2 sm:h-2.5 lg:h-3 rounded-full transition-all duration-300 cursor-pointer ${index === currentSlide
                 ? "bg-[#034E53] w-6 sm:w-7 lg:w-8"
                 : "bg-gray-400 w-2 sm:w-2.5 lg:w-3 hover:bg-gray-500"
-            }`}
+              }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
