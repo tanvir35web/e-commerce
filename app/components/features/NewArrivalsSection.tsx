@@ -1,7 +1,7 @@
 "use client";
 
-import { useProducts } from "../hooks/useProducts";
-import { NewArrivalsSkeleton } from "../skeletonLoader/SkeletonLoader";
+import { useProducts } from "@/app/hooks/useProducts";
+import { NewArrivalsSkeleton } from "../ui/skeletons";
 import { ProductCard } from "./ProductCard";
 
 const NewArrivalsSection = () => {

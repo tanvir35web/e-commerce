@@ -1,6 +1,6 @@
 "use client";
-import { useCategories } from "../hooks/useCategories";
-import { CategorySliderSkeleton } from "../skeletonLoader/SkeletonLoader";
+import { useCategories } from "@/app/hooks/useCategories";
+import { CategorySliderSkeleton } from "../ui/skeletons";
 import { CategorySlider } from "./CategorySlider";
 
 const CategorySection = () => {

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { CategorySliderProps } from "../type";
+import { CategorySliderProps } from "@/app/types";
 import Image from "next/image";
-import { LeftArrowIcon, RightArrowIcon } from "../icons/icons";
+import { LeftArrowIcon, RightArrowIcon } from "../ui/icons";
 
 export const CategorySlider: React.FC<CategorySliderProps> = ({
   categories,

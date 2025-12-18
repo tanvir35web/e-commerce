@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
-import { SlideData } from "../type";
+import { SlideData } from "@/app/types";
 
 interface HeroSliderProps {
   slides: SlideData[];

@@ -1,8 +1,8 @@
-import BannerImageOne from "../../public/images/hero-images/banner-photo-1.png";
-import BannerImageTwo from "../../public/images/hero-images/banner-photo-2.png";
-import BannerImageThree from "../../public/images/hero-images/banner-photo-3.png";
+import BannerImageOne from "../../../public/images/hero-images/banner-photo-1.png";
+import BannerImageTwo from "../../../public/images/hero-images/banner-photo-2.png";
+import BannerImageThree from "../../../public/images/hero-images/banner-photo-3.png";
 import HeroSlider from "./HeroSlider";
-import { SlideData } from "../type";
+import { SlideData } from "@/app/types";
 
 const HeroSliderDemo = () => {
   const slideData: SlideData[] = [

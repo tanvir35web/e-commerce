@@ -1,9 +1,9 @@
-import CategorySection from "./components/CategorySection";
-import FooterSection from "./components/FooterSection";
-import HeroSlider from "./components/HeroSection";
-import NewArrivalsSection from "./components/NewArrivalsSection";
-import PrimaryNavbar from "./components/PrimaryNavbar";
-import SecondaryNavbar from "./components/SecondaryNavbar";
+import CategorySection from "./components/features/CategorySection";
+import FooterSection from "./components/layout/FooterSection";
+import HeroSlider from "./components/features/HeroSection";
+import NewArrivalsSection from "./components/features/NewArrivalsSection";
+import PrimaryNavbar from "./components/layout/PrimaryNavbar";
+import SecondaryNavbar from "./components/layout/SecondaryNavbar";
 
 export default function Home() {
   return (

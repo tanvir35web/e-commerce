@@ -33,7 +33,7 @@ export interface ProductData {
   data: Product[];
 }
 
-export  interface ProductCardProps {
+export interface ProductCardProps {
   product: Product;
 }
 
@@ -45,5 +45,4 @@ export interface CategoryData {
 export interface CategorySliderProps {
   categories: CategoryData;
 }
-
 

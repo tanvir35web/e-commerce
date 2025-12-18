@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import WinstoreLogo from "../../public/images/nav-images/winstore-logo.png";
+import WinstoreLogo from "../../../public/images/nav-images/winstore-logo.png";
 import {
   CartIcon,
   HeadPhoneIcon,
@@ -10,7 +10,7 @@ import {
   LoveIcon,
   SearchIcon,
   UserIcon,
-} from "../icons/icons";
+} from "../ui/icons";
 
 const PrimaryNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

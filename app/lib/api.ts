@@ -1,4 +1,4 @@
-import { Product, Category } from "../type";
+import { Product, Category } from "@/app/types";
 
 export interface ApiResponse<T> {
   success: boolean;

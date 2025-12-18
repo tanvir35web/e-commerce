@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ProductCardProps } from "../type";
+import { ProductCardProps } from "@/app/types";
 import Image from "next/image";
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {

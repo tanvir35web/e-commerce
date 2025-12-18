@@ -8,7 +8,7 @@ import {
   InstagramIcon,
   LinkedInIcon,
   TwitterIcon,
-} from "../icons/icons";
+} from "../ui/icons";
 
 const SecondaryNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

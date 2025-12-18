@@ -4,12 +4,12 @@ import {
   InstagramIcon,
   LinkedInIcon,
   TwitterIcon,
-} from "../icons/icons";
-import WinstoreLogo from "../../public/images/nav-images/winstore-logo.png";
-import VisaImage from "../../public/images/footer-images/visa.png";
-import MasterImage from "../../public/images/footer-images/master-card.png";
-import CashImage from "../../public/images/footer-images/cash.png";
-import EasyImage from "../../public/images/footer-images/installment.png";
+} from "../ui/icons";
+import WinstoreLogo from "../../../public/images/nav-images/winstore-logo.png";
+import VisaImage from "../../../public/images/footer-images/visa.png";
+import MasterImage from "../../../public/images/footer-images/master-card.png";
+import CashImage from "../../../public/images/footer-images/cash.png";
+import EasyImage from "../../../public/images/footer-images/installment.png";
 
 const footerData = {
   trending: [
