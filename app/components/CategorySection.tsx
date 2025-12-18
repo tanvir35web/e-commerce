@@ -25,9 +25,12 @@ const CategorySection = () => {
   }
 
   return (
-    <div className="bg-gradient-to-b from-[#F3EDC9] to-white">
-      <CategorySlider categories={categories} />
-    </div>
+    <>
+      <div className="bg-gradient-to-b from-[#F3EDC9] to-white">
+        <CategorySlider categories={categories} />
+      </div>
+      <div className="h-[1px] w-full max-w-[1220px] mx-auto bg-[#0000002B] mt-2"></div>
+    </>
   );
 };
 

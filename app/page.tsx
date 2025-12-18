@@ -12,7 +12,6 @@ export default function Home() {
       <SecondaryNavbar />
       <HeroSlider />
       <CategorySection />
-      <div className="h-[1px] w-full max-w-[1220px] mx-auto bg-[#0000002B] mt-2"></div>
       <NewArrivalsSection />
       <FooterSection />
     </div>
